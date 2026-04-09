@@ -14,6 +14,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Ajuste o valor de 50 para quando você quer que o menu mude
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -22,10 +23,12 @@ export default function Header() {
 
   return (
     <header 
+      // Header sticky (fixed) com responsividade e cores dinâmicas baseadas em isScrolled
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-white border-b border-zinc-100 py-3 shadow-md' 
-          // Ajustado: Volta a ser transparente no início sobre o Hero escuro
+          // Fundo Claro/Transparente com Sombra Sutil no Início (Luminoso)
+          ? 'bg-white/95 backdrop-blur-md border-b border-zinc-100 py-3 shadow-md' 
+          // Estado Inicial: Transparente sobre o Hero
           : 'bg-transparent py-5'
       }`}
     >
@@ -46,13 +49,13 @@ export default function Header() {
             <span className="text-xl font-serif font-bold text-white">DM</span>
           </div>
 
-          {/* Nome com cor condicional */}
+          {/* Nome 100% em negrito, com cor condicional baseada em isScrolled */}
           <span className={`text-xl font-serif font-bold transition-all duration-300 hidden sm:block ${isScrolled || isMobileMenuOpen ? 'text-zinc-900' : 'text-white'}`}>
             Débora Monteiro Advogada
           </span>
         </div>
 
-        {/* LADO DIREITO: Navegação e Contato */}
+        {/* CENTRO E DIREITA: Navegação Desktop e Botão Mobile */}
         <div className="flex items-center gap-6">
           {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-6">
@@ -60,27 +63,29 @@ export default function Header() {
               <a 
                 key={item.name} 
                 href={item.href} 
-                // Cor do texto condicional
+                // Cor do texto condicional baseada em isScrolled
                 className={`text-sm font-medium transition-all duration-300 ${isScrolled ? 'text-zinc-900 hover:text-amber-700' : 'text-zinc-100 hover:text-amber-400'}`}
               >
                 {item.name}
               </a>
             ))}
+            {/* Telefone destacado e condicional para contraste */}
             <span className={`text-sm font-semibold transition-all duration-300 whitespace-nowrap ${isScrolled ? 'text-amber-700' : 'text-amber-500'}`}>
               (65) 99113-3336
             </span>
           </nav>
 
+          {/* Botão Superior Direito - Laranja Vibrante Mantido */}
           <a
             href="https://wa.me/5565991133336"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-block bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold py-2.5 px-5 rounded transition shadow-md whitespace-nowrap"
+            className="hidden md:inline-block bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold py-2.5 px-5 rounded transition shadow-md whitespace-nowrap"
           >
             Agendar Consulta
           </a>
 
-          {/* Botão Menu Hambúrguer (Mobile) - Cor condicional */}
+          {/* Botão Menu Hambúrguer (Mobile) - Cor condicional baseada em isScrolled */}
           <button 
             className="md:hidden p-2 focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -96,9 +101,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* MENU MOBILE EXPANDIDO - Fundo branco mantido */}
+      {/* MENU MOBILE EXPANDIDO - Fundo branco/transparente */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-zinc-100 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-zinc-100 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl">
           <nav className="flex flex-col gap-4">
             {menuItems.map((item) => (
               <a 
@@ -115,7 +120,7 @@ export default function Header() {
               href="https://wa.me/5565991133336"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-amber-600 text-center text-white text-base font-bold py-3 px-5 rounded shadow-md"
+              className="bg-orange-600 text-center text-white text-base font-bold py-3 px-5 rounded shadow-md"
             >
               Agendar Consulta - (65) 99113-3336
             </a>

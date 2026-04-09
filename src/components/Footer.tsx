@@ -4,38 +4,47 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-zinc-950 text-zinc-400 py-12 px-6 text-sm border-t border-amber-900/30 overflow-hidden">
+    <footer id="footer" className="relative bg-zinc-950 text-zinc-400 py-8 px-6 text-sm border-t border-zinc-800 overflow-hidden">
       
-      {/* 1. IMAGEM DE FUNDO E EFEITO 'FUMÊ DOURADO' NO RODAPÉ */}
+      {/* IMAGEM DE FUNDO E EFEITO */}
       <div className="absolute inset-0 z-0">
         <img 
           src="/hero-bg.jpg" 
-          alt="Fundo Rodapé"
+          alt="Luminoso Fundo Rodapé Premium"
           className="w-full h-full object-cover opacity-25" 
         />
-        {/* Filtro Luz Dourada/Âmbar suave subindo da base */}
         <div className="absolute inset-0 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent"></div>
-        {/* Gradiente Fumê para garantir a leitura perfeita do texto sobre a imagem */}
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/70 to-zinc-950/50"></div>
       </div>
 
-      {/* 2. CONTEÚDO DO RODAPÉ (Trazido para frente com z-10) */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 px-6">
         
         {/* LADO ESQUERDO: Empresa e OAB */}
         <div className="flex-1">
-          <h4 className="text-2xl font-serif font-bold text-white mb-2">Débora Monteiro</h4>
+          <h4 className="text-2xl font-serif font-bold text-white mb-2 underline decoration-amber-500/50 decoration-2 underline-offset-4">Débora Monteiro</h4>
           <p className="mb-1 text-base font-medium text-zinc-300">Advocacia e Consultoria Jurídica</p>
-          <p className="text-amber-500 font-semibold text-lg">OAB/MT 00.000</p>
+          <p className="text-amber-600 font-semibold text-lg">OAB/MT 00.000</p>
         </div>
 
-        {/* LADO DIREITO: Fale Conosco */}
+        {/* LADO DIREITO: Fale Conosco (Agora com Instagram) */}
         <div className="flex-1 md:text-right flex flex-col items-start md:items-end gap-3">
           <p className="text-lg font-bold text-white mb-2 underline decoration-amber-500/50 decoration-2 underline-offset-4">Fale Conosco</p>
           
           <p className="flex items-center gap-2 group">
             <svg className="w-5 h-5 text-amber-500 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-            <a href="mailto:contato@deboramonteiroadv.com.br" className='text-zinc-300 hover:text-white transition-colors'>contato@deboramonteiroadv.com.br</a>
+            <a href="mailto:deb_monteiro@hotmail.com" className='text-zinc-300 hover:text-white transition-colors'>deb_monteiro@hotmail.com</a>
+          </p>
+
+          {/* NOVA LINHA: Instagram */}
+          <p className="flex items-center gap-2 group">
+            <svg className="w-5 h-5 text-amber-500 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <a href="https://instagram.com/deboramonteiroadv" target="_blank" rel="noopener noreferrer" className='text-zinc-300 hover:text-white transition-colors'>
+              @deboramonteiroadv
+            </a>
           </p>
           
           <p className="flex items-center gap-2 group">
@@ -51,8 +60,8 @@ export default function Footer() {
 
       </div>
       
-      {/* 3. BARRA FINAL (Créditos e Direitos) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-10 pt-8 border-t border-zinc-800/80 text-center md:text-left flex flex-col md:flex-row justify-between text-zinc-400">
+      {/* BARRA FINAL */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-8 pt-6 border-t border-zinc-800/80 text-center md:text-left flex flex-col md:flex-row justify-between text-zinc-400">
         <p>
           &copy; {currentYear}{" "}
           <a 
