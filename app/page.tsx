@@ -3,20 +3,19 @@ import Hero from "../src/components/Hero";
 import Services from "../src/components/Services";
 import About from "../src/components/About";
 import Testimonials from "../src/components/Testimonials";
+import Contact from "../src/components/Contact";
 import Footer from "../src/components/Footer";
 
 export default function Home() {
   return (
-    // scroll-smooth para navegação suave, e flex flex-col para responsividade
     <main className="flex min-h-screen flex-col font-sans scroll-smooth">
       <Header /> 
       
-      {/* O Hero agora é a seção 'Premium Golden Smoky' */}
-      <div id="hero">
+      <div id="home">
         <Hero />
       </div>
-      
-      {/* O restante do corpo é LUMINOSO (bg-white ou bg-zinc-50) */}
+
+      {/* IDs ESSENCIAIS PARA O MENU FUNCIONAR */}
       <div id="servicos">
         <Services />
       </div>
@@ -27,6 +26,10 @@ export default function Home() {
       
       <div id="depoimentos">
         <Testimonials />
+      </div>
+      
+      <div id="contato">
+        <Contact />
       </div>
       
       <Footer />

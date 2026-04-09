@@ -6,6 +6,7 @@ const menuItems = [
   { name: 'Áreas de Atuação', href: '#servicos' },
   { name: 'Sobre', href: '#sobre' },
   { name: 'Depoimentos', href: '#depoimentos' },
+  { name: 'Contato', href: '#contato' },
 ];
 
 export default function Header() {

@@ -23,7 +23,7 @@ export default function About() {
             {/* Badge Flutuante sobre a foto */}
             <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-zinc-100">
               <p className="font-serif font-bold text-zinc-900 text-lg">OAB/MT</p>
-              <p className="text-amber-600 font-bold">00.000</p>
+              <p className="text-amber-600 font-bold">24567/O</p>
             </div>
           </div>
         </div>

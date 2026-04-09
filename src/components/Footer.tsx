@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="flex-1">
           <h4 className="text-2xl font-serif font-bold text-white mb-2 underline decoration-amber-500/50 decoration-2 underline-offset-4">Débora Monteiro</h4>
           <p className="mb-1 text-base font-medium text-zinc-300">Advocacia e Consultoria Jurídica</p>
-          <p className="text-amber-600 font-semibold text-lg">OAB/MT 00.000</p>
+          <p className="text-amber-600 font-semibold text-lg">OAB/MT 24567/O</p>
         </div>
 
         {/* LADO DIREITO: Fale Conosco (Agora com Instagram) */}
