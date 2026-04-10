@@ -4,23 +4,33 @@ import React, { useState } from 'react';
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     const formData = new FormData(e.currentTarget);
     
-    // Usaremos o FormSubmit para processar o envio (Gratuito e fácil)
+    // CONFIGURAÇÕES EXTRAS DO FORMSUBMIT
+    formData.append("_captcha", "false"); // Desativa o captcha chato de confirmação
+    formData.append("_subject", "Novo Contato pelo Site - Débora Monteiro Advogada"); // Assunto do email
+    
     try {
-      const response = await fetch("https://formsubmit.co/ajax/contato@deboramonteiroadv.com.br", {
+      const response = await fetch("https://formsubmit.co/ajax/aidanolima@gmail.com", {
         method: "POST",
         body: formData
       });
 
       if (response.ok) {
         setIsSubmitted(true);
+      } else {
+        alert("Ocorreu um erro ao processar. Por favor, tente pelo WhatsApp.");
       }
     } catch (error) {
-      alert("Erro ao enviar. Por favor, tente pelo WhatsApp.");
+      alert("Erro de conexão. Por favor, tente pelo WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -53,7 +63,7 @@ export default function Contact() {
             <ContactInfoItem 
               icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
               title="E-mail"
-              desc="contato@deboramonteiroadv.com.br"
+              desc="aidanolima@gmail.com"
               sub="Respondemos em até 24 horas."
             />
           </div>
@@ -95,10 +105,10 @@ export default function Contact() {
                 <label className="text-sm font-bold">Área de prática *</label>
                 <select name="area" required className="w-full p-3 bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
                   <option value="">Selecione uma área</option>
-                  <option value="familia">Direito de Família</option>
-                  <option value="trabalhista">Direito Trabalhista</option>
-                  <option value="civil">Direito Civil</option>
-                  <option value="previdenciario">Direito Previdenciário</option>
+                  <option value="Direito de Família">Direito de Família</option>
+                  <option value="Direito Trabalhista">Direito Trabalhista</option>
+                  <option value="Direito Civil">Direito Civil</option>
+                  <option value="Direito Previdenciário">Direito Previdenciário</option>
                 </select>
               </div>
 
@@ -114,8 +124,19 @@ export default function Contact() {
                 </span>
               </label>
 
-              <button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-lg transition shadow-lg mt-4 uppercase tracking-widest text-sm">
-                Enviar solicitação
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 disabled:cursor-not-allowed text-white font-bold py-4 rounded-lg transition shadow-lg mt-4 uppercase tracking-widest text-sm flex justify-center items-center gap-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    Enviando...
+                  </>
+                ) : (
+                  "Enviar solicitação"
+                )}
               </button>
               
               <p className="text-[10px] text-zinc-400 text-center uppercase tracking-tight">
