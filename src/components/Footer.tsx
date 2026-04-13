@@ -4,7 +4,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="footer" className="relative bg-zinc-950 text-zinc-400 py-8 px-6 text-sm border-t border-zinc-800 overflow-hidden">
+    // CLAREAMENTO UNIFICADO: Mudança de bg-zinc-950 para bg-zinc-900
+    <footer id="footer" className="relative bg-zinc-900 text-zinc-400 py-8 px-6 text-sm border-t border-zinc-800 overflow-hidden">
       
       {/* IMAGEM DE FUNDO E EFEITO */}
       <div className="absolute inset-0 z-0">
@@ -13,8 +14,9 @@ export default function Footer() {
           alt="Luminoso Fundo Rodapé Premium"
           className="w-full h-full object-cover opacity-25" 
         />
+        {/* AJUSTE DE GRADIENTE: Blending com o novo bg-zinc-900 */}
         <div className="absolute inset-0 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/70 to-zinc-950/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/70 to-zinc-900/50"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 px-6">
@@ -23,19 +25,20 @@ export default function Footer() {
         <div className="flex-1">
           <h4 className="text-2xl font-serif font-bold text-white mb-2 underline decoration-amber-500/50 decoration-2 underline-offset-4">Débora Monteiro</h4>
           <p className="mb-1 text-base font-medium text-zinc-300">Advocacia e Consultoria Jurídica</p>
+          {/* ATUALIZAÇÃO CONFORME PRINT: Novo OAB */}
           <p className="text-amber-600 font-semibold text-lg">OAB/MT 24567/O</p>
         </div>
 
-        {/* LADO DIREITO: Fale Conosco (Agora com Instagram) */}
+        {/* LADO DIREITO: Fale Conosco */}
         <div className="flex-1 md:text-right flex flex-col items-start md:items-end gap-3">
           <p className="text-lg font-bold text-white mb-2 underline decoration-amber-500/50 decoration-2 underline-offset-4">Fale Conosco</p>
           
           <p className="flex items-center gap-2 group">
             <svg className="w-5 h-5 text-amber-500 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            {/* ATUALIZAÇÃO CONFORME PRINT: Novo e-mail Hotmail */}
             <a href="mailto:deb_monteiro@hotmail.com" className='text-zinc-300 hover:text-white transition-colors'>deb_monteiro@hotmail.com</a>
           </p>
 
-          {/* NOVA LINHA: Instagram */}
           <p className="flex items-center gap-2 group">
             <svg className="w-5 h-5 text-amber-500 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -61,7 +64,8 @@ export default function Footer() {
       </div>
       
       {/* BARRA FINAL */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-8 pt-6 border-t border-zinc-800/80 text-center md:text-left flex flex-col md:flex-row justify-between text-zinc-400">
+      {/* AJUSTE DE BORDA: border-zinc-800 */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-8 pt-6 border-t border-zinc-800 text-center md:text-left flex flex-col md:flex-row justify-between text-zinc-400">
         <p>
           &copy; {currentYear}{" "}
           <a 

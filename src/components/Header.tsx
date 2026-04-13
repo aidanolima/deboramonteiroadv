@@ -15,6 +15,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Valor de 50 para quando o menu deve mudar
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -23,9 +24,10 @@ export default function Header() {
 
   return (
     <header 
+      // CLAREAMENTO UNIFICADO: Mudança de bg-white para bg-zinc-900 no scrolled
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-white/95 backdrop-blur-md border-b border-zinc-100 py-3 shadow-md' 
+          ? 'bg-zinc-900/95 backdrop-blur-md border-b border-zinc-700/50 py-3 shadow-lg' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -36,9 +38,11 @@ export default function Header() {
           <img 
             src="/logo.png" 
             alt="Logo Débora Monteiro" 
-            className={`h-11 w-11 rounded-full object-cover shadow-sm transition-all duration-300 ${isScrolled ? 'border border-zinc-200' : 'border-2 border-amber-500/50'}`}
+            // AJUSTE DE BORDA: border-zinc-700 para contraste sobre o fundo escuro
+            className={`h-11 w-11 rounded-full object-cover shadow-sm transition-all duration-300 ${isScrolled ? 'border border-zinc-700' : 'border-2 border-amber-500/50'}`}
           />
-          <span className={`text-xl font-serif font-bold transition-all duration-300 hidden sm:block ${isScrolled || isMobileMenuOpen ? 'text-zinc-900' : 'text-white'}`}>
+          {/* AJUSTE DE COR: text-white no scrolled */}
+          <span className={`text-xl font-serif font-bold transition-all duration-300 hidden sm:block ${isScrolled || isMobileMenuOpen ? 'text-white' : 'text-white'}`}>
             Débora Monteiro Advogada
           </span>
         </div>
@@ -50,12 +54,14 @@ export default function Header() {
               <a 
                 key={item.name} 
                 href={item.href} 
-                className={`text-sm font-medium transition-all duration-300 ${isScrolled ? 'text-zinc-900 hover:text-amber-700' : 'text-zinc-100 hover:text-amber-400'}`}
+                // AJUSTE DE COR: text-zinc-100 no scrolled para visibilidade
+                className={`text-sm font-medium transition-all duration-300 ${isScrolled ? 'text-zinc-100 hover:text-amber-400' : 'text-zinc-100 hover:text-amber-400'}`}
               >
                 {item.name}
               </a>
             ))}
-            <span className={`text-sm font-semibold transition-all duration-300 whitespace-nowrap ${isScrolled ? 'text-amber-700' : 'text-amber-500'}`}>
+            {/* AJUSTE DE COR: text-amber-500 no scrolled */}
+            <span className={`text-sm font-semibold transition-all duration-300 whitespace-nowrap ${isScrolled ? 'text-amber-500' : 'text-amber-500'}`}>
               (65) 99113-3336
             </span>
           </nav>
@@ -74,7 +80,8 @@ export default function Header() {
             className="md:hidden p-2 focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <svg className={`w-6 h-6 ${isScrolled || isMobileMenuOpen ? 'text-zinc-900' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* AJUSTE DE COR: text-white no scrolled */}
+            <svg className={`w-6 h-6 ${isScrolled || isMobileMenuOpen ? 'text-white' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -87,19 +94,21 @@ export default function Header() {
 
       {/* MENU MOBILE EXPANDIDO */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-zinc-100 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl animate-in slide-in-from-top duration-300">
+        // CLAREAMENTO UNIFICADO: bg-zinc-900 no mobile menu
+        <div className="md:hidden bg-zinc-900/95 backdrop-blur-md border-t border-zinc-700/50 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl animate-in slide-in-from-top duration-300">
           <nav className="flex flex-col gap-4">
             {menuItems.map((item) => (
               <a 
                 key={item.name} 
                 href={item.href} 
-                onClick={() => setIsMobileMenuOpen(false)} // FECHA AO CLICAR
-                className="text-base font-medium text-zinc-800 hover:text-amber-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)} 
+                // AJUSTE DE COR: text-zinc-100 no mobile
+                className="text-base font-medium text-zinc-100 hover:text-amber-400 transition-colors"
               >
                 {item.name}
               </a>
             ))}
-            <div className="h-px bg-zinc-100 my-2"></div>
+            <div className="h-px bg-zinc-700 my-2"></div>
             <a
               href="https://wa.me/5565991133336"
               target="_blank"
