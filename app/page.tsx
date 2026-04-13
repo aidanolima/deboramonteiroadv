@@ -5,6 +5,7 @@ import About from "../src/components/About";
 import Testimonials from "../src/components/Testimonials";
 import Contact from "../src/components/Contact";
 import Footer from "../src/components/Footer";
+import FloatingWhatsApp from "../src/components/FloatingWhatsApp"; // 1. Importar o botão
 
 export default function Home() {
   return (
@@ -15,7 +16,6 @@ export default function Home() {
         <Hero />
       </div>
 
-      {/* IDs ESSENCIAIS PARA O MENU FUNCIONAR */}
       <div id="servicos">
         <Services />
       </div>
@@ -33,6 +33,9 @@ export default function Home() {
       </div>
       
       <Footer />
+      
+      {/* 2. Adicionar o botão flutuante aqui */}
+      <FloatingWhatsApp />
     </main>
   );
 }
