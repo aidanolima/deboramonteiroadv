@@ -4,70 +4,60 @@ export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY || "";
 
-    if (!apiKey || apiKey === "sua_chave_aqui") {
-      return NextResponse.json({ 
-        reply: "⚠️ Erro interno de configuração de chave." 
-      });
+    if (!apiKey || apiKey === "AIzaSyD8rINDdjts2FYrdEnKaB4GbCGSamO1AuU") {
+      return NextResponse.json({ reply: "⚠️ Erro: Chave do Gemini não configurada." });
     }
 
     const body = await req.json();
     
-    const systemPrompt = `Você é a assistente virtual exclusiva do escritório 'Débora Monteiro Advogada', localizado em Cuiabá - MT.
-    Seu tom deve ser estritamente profissional, empático, acolhedor, humanizado e direto.
+    // Agora recebemos o histórico inteiro da conversa para a IA ter "memória"
+    const history = body.history || [];
+    const historyText = history.map((msg: any) => `${msg.role === 'user' ? 'Cliente' : 'Assistente'}: ${msg.content}`).join('\n');
+
+    // A MENTE DA ASSISTENTE (FUNIL DE VENDAS ATIVADO)
+    const systemPrompt = `Você é a assistente virtual exclusiva da 'Débora Monteiro Advogada'.
+    Seu tom é profissional, humanizado e focado em converter o atendimento em consulta.
     
-    Suas regras:
-    1. Responda dúvidas simples sobre Direito de Família, Trabalhista, Civil e Previdenciário.
-    2. NÃO dê conselhos jurídicos definitivos ou pareceres. O objetivo é acalmar o cliente e levá-lo para a consulta.
-    3. Sempre seja concisa, responda em parágrafos curtos.
-    4. Encoraje o cliente a falar no WhatsApp (65) 99113336.
-    5. NUNCA invente informações.`;
+    REGRA 1 - CAPTAÇÃO DE LEAD (MUITO IMPORTANTE):
+    Logo na sua PRIMEIRA resposta, após dar boas-vindas e acolher a dúvida do cliente, VOCÊ DEVE pedir o telefone (WhatsApp) e o e-mail dele para "registrar o atendimento no sistema". Nunca avance profundamente no caso sem pedir esses dados.
 
-    const promptCompleto = `${systemPrompt}\n\nMensagem do cliente: ${body.message}\n\nSua resposta:`;
+    REGRA 2 - A OFERTA DE AGENDA:
+    Quando o cliente falar sobre agendar, honorários, valores, ou quiser falar com a advogada, pergunte DIRETAMENTE: 
+    "Você gostaria de agendar uma consulta com a Dra. Débora para avaliarmos os detalhes do seu caso? Responda SIM ou NÃO."
 
-    // 1. MUDANÇA ESTRATÉGICA: Usando a versão "Lite" que tem menos fila de espera
-    const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
+    REGRA 3 - O GATILHO DO SIM:
+    Se o cliente responder "SIM" (ou qualquer variação de concordância), você NÃO deve responder com texto longo. Responda EXATAMENTE E APENAS com esta palavra secreta: 
+    [REDIRECIONAR_AGENDA]
+
+    REGRA 4 - O GATILHO DO NÃO:
+    Se o cliente responder "NÃO", diga que compreende perfeitamente, reforce que o escritório está à disposição e pergunte se há mais alguma dúvida rápida que você possa anotar.`;
+
+    const promptCompleto = `${systemPrompt}\n\nHistórico da conversa:\n${historyText}\n\nAssistente:`;
+
+    // Usando o modelo de nova geração que sua chave liberou!
+    const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(googleURL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: promptCompleto }]
-          }
-        ]
+        contents: [{ parts: [{ text: promptCompleto }] }]
       })
     });
 
     const data = await response.json();
 
-    // 2. RESPOSTA ELEGANTE SE O GOOGLE CAIR:
     if (!response.ok) {
-      console.error("Erro retornado do Google:", data);
-      
-      // Se for o erro 503 (Alta Demanda), o cliente recebe essa mensagem humanizada:
       if (data.error?.code === 503) {
-        return NextResponse.json({ 
-          reply: "No momento todos os nossos especialistas estão em atendimento e minha rede está um pouco congestionada. 😅\n\nPara que você não fique esperando, por favor, me chame diretamente no WhatsApp clicando no botão verde ou adicionando o número (65) 99113336. A Dra. Débora fará questão de te atender!" 
-        });
+        return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113-3336." });
       }
-
-      return NextResponse.json({ 
-        reply: `Sistema indisponível no momento. Por favor, acesse nosso WhatsApp: (65) 99113336.` 
-      });
+      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113-3336.` });
     }
 
     const replyText = data.candidates[0].content.parts[0].text;
-
     return NextResponse.json({ reply: replyText });
 
   } catch (error: any) {
-    console.error("Erro interno no servidor:", error);
-    return NextResponse.json(
-      { reply: "Olá! Devido ao alto volume de contatos, peço gentilmente que nos chame direto no WhatsApp: (65) 99113336. Nossa equipe está de prontidão!" },
-      { status: 500 }
-    );
+    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113-3336." }, { status: 500 });
   }
 }
