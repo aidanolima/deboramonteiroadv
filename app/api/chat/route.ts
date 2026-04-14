@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     const history = body.history || [];
     const historyText = history.map((msg: any) => `${msg.role === 'user' ? 'Cliente' : 'Assistente'}: ${msg.content}`).join('\n');
 
-    // O NOVO CÉREBRO: Estratégia de Reciprocidade e Gatilho Inteligente
     const systemPrompt = `Você é a assistente virtual exclusiva da 'Débora Monteiro Advogada'.
     Seu tom é profissional, humanizado e focado em gerar confiança.
     
@@ -34,7 +33,6 @@ export async function POST(req: Request) {
 
     const promptCompleto = `${systemPrompt}\n\nHistórico da conversa:\n${historyText}\n\nAssistente:`;
 
-    // Mantendo no modelo Lite para evitar os engarrafamentos gratuitos
     const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
 
     const response = await fetch(googleURL, {
@@ -47,6 +45,7 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
+    // INTERCEPTANDO ERROS DO GOOGLE
     if (!response.ok) {
       console.error("Erro retornado do Google:", data);
       
@@ -54,8 +53,17 @@ export async function POST(req: Request) {
         return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113-3336." });
       }
       
-      // MUDANÇA AQUI: Agora a IA vai dedurar qual é o erro exato que o Google mandou!
+      // O Debugger no lugar certo
       return NextResponse.json({ 
         reply: `⚠️ DEBUG - Erro do Google: [Código ${data.error?.code}] ${data.error?.message}` 
       });
     }
+
+    const replyText = data.candidates[0].content.parts[0].text;
+    return NextResponse.json({ reply: replyText });
+
+  } catch (error: any) {
+    console.error("Erro no servidor:", error);
+    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113-3336." }, { status: 500 });
+  }
+}
