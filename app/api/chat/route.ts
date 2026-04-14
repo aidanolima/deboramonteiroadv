@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY || "";
 
-    if (!apiKey || apiKey === "AIzaSyD8rINDdjts2FYrdEnKaB4GbCGSamO1AuU") {
+    if (!apiKey || apiKey === "sua_chave_aqui") {
       return NextResponse.json({ reply: "⚠️ Erro: Chave do Gemini não configurada." });
     }
 
