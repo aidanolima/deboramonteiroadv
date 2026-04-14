@@ -67,7 +67,7 @@ export default function Header() {
           </nav>
 
           <a
-            href="https://wa.me/5565991133336"
+            href="https://wa.me/556599113336"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-block bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold py-2.5 px-5 rounded transition shadow-md whitespace-nowrap"
@@ -110,7 +110,7 @@ export default function Header() {
             ))}
             <div className="h-px bg-zinc-700 my-2"></div>
             <a
-              href="https://wa.me/5565991133336"
+              href="https://wa.me/556599113336"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
