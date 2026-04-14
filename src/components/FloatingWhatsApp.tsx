@@ -48,7 +48,7 @@ export default function FloatingWhatsApp() {
       if (response.ok) {
         setChatLog((prev) => [...prev, { role: 'ai', content: data.reply }]);
       } else {
-        setChatLog((prev) => [...prev, { role: 'ai', content: 'Desculpe, a IA encontrou um erro. Chame no WhatsApp: (65) 99113-3336.' }]);
+        setChatLog((prev) => [...prev, { role: 'ai', content: 'Desculpe, a IA encontrou um erro. Chame no WhatsApp: (65) 99113336.' }]);
       }
     } catch (error) {
       console.error("Erro no fetch:", error);

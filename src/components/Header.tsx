@@ -62,7 +62,7 @@ export default function Header() {
             ))}
             {/* AJUSTE DE COR: text-amber-500 no scrolled */}
             <span className={`text-sm font-semibold transition-all duration-300 whitespace-nowrap ${isScrolled ? 'text-amber-500' : 'text-amber-500'}`}>
-              (65) 99113-3336
+              (65) 99113336
             </span>
           </nav>
 
@@ -116,7 +116,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="bg-orange-600 text-center text-white text-base font-bold py-3 px-5 rounded shadow-md"
             >
-              Agendar Consulta - (65) 99113-3336
+              Agendar Consulta - (65) 99113336
             </a>
           </nav>
         </div>

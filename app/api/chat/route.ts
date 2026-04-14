@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     1. Responda dúvidas simples sobre Direito de Família, Trabalhista, Civil e Previdenciário.
     2. NÃO dê conselhos jurídicos definitivos ou pareceres. O objetivo é acalmar o cliente e levá-lo para a consulta.
     3. Sempre seja concisa, responda em parágrafos curtos.
-    4. Encoraje o cliente a falar no WhatsApp (65) 99113-3336.
+    4. Encoraje o cliente a falar no WhatsApp (65) 99113336.
     5. NUNCA invente informações.`;
 
     const promptCompleto = `${systemPrompt}\n\nMensagem do cliente: ${body.message}\n\nSua resposta:`;
@@ -50,12 +50,12 @@ export async function POST(req: Request) {
       // Se for o erro 503 (Alta Demanda), o cliente recebe essa mensagem humanizada:
       if (data.error?.code === 503) {
         return NextResponse.json({ 
-          reply: "No momento todos os nossos especialistas estão em atendimento e minha rede está um pouco congestionada. 😅\n\nPara que você não fique esperando, por favor, me chame diretamente no WhatsApp clicando no botão verde ou adicionando o número (65) 99113-3336. A Dra. Débora fará questão de te atender!" 
+          reply: "No momento todos os nossos especialistas estão em atendimento e minha rede está um pouco congestionada. 😅\n\nPara que você não fique esperando, por favor, me chame diretamente no WhatsApp clicando no botão verde ou adicionando o número (65) 99113336. A Dra. Débora fará questão de te atender!" 
         });
       }
 
       return NextResponse.json({ 
-        reply: `Sistema indisponível no momento. Por favor, acesse nosso WhatsApp: (65) 99113-3336.` 
+        reply: `Sistema indisponível no momento. Por favor, acesse nosso WhatsApp: (65) 99113336.` 
       });
     }
 
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("Erro interno no servidor:", error);
     return NextResponse.json(
-      { reply: "Olá! Devido ao alto volume de contatos, peço gentilmente que nos chame direto no WhatsApp: (65) 99113-3336. Nossa equipe está de prontidão!" },
+      { reply: "Olá! Devido ao alto volume de contatos, peço gentilmente que nos chame direto no WhatsApp: (65) 99113336. Nossa equipe está de prontidão!" },
       { status: 500 }
     );
   }
