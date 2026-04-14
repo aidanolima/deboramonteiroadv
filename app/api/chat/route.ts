@@ -49,15 +49,15 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       if (data.error?.code === 503) {
-        return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113-3336." });
+        return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113336." });
       }
-      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113-3336.` });
+      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113336.` });
     }
 
     const replyText = data.candidates[0].content.parts[0].text;
     return NextResponse.json({ reply: replyText });
 
   } catch (error: any) {
-    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113-3336." }, { status: 500 });
+    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113336." }, { status: 500 });
   }
 }
