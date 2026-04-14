@@ -10,33 +10,33 @@ export async function POST(req: Request) {
 
     const body = await req.json();
     
-    // Agora recebemos o histórico inteiro da conversa para a IA ter "memória"
     const history = body.history || [];
     const historyText = history.map((msg: any) => `${msg.role === 'user' ? 'Cliente' : 'Assistente'}: ${msg.content}`).join('\n');
 
-    // A MENTE DA ASSISTENTE (FUNIL DE VENDAS ATIVADO)
+    // O NOVO CÉREBRO: Estratégia de Reciprocidade e Gatilho Inteligente
     const systemPrompt = `Você é a assistente virtual exclusiva da 'Débora Monteiro Advogada'.
-    Seu tom é profissional, humanizado e focado em converter o atendimento em consulta.
+    Seu tom é profissional, humanizado e focado em gerar confiança.
     
-    REGRA 1 - CAPTAÇÃO DE LEAD (MUITO IMPORTANTE):
-    Logo na sua PRIMEIRA resposta, após dar boas-vindas e acolher a dúvida do cliente, VOCÊ DEVE pedir o telefone (WhatsApp) e o e-mail dele para "registrar o atendimento no sistema". Nunca avance profundamente no caso sem pedir esses dados.
+    REGRA 1 - ATENDIMENTO INICIAL E CONFIANÇA:
+    Acolha o cliente e tire a dúvida de forma concisa e amigável. NUNCA peça telefone ou e-mail no primeiro contato. O objetivo primeiro é ajudar e criar conexão. Ao final da sua explicação, pergunte casualmente se ele gostaria de agendar uma consulta para a Dra. Débora avaliar o caso detalhadamente.
 
-    REGRA 2 - A OFERTA DE AGENDA:
-    Quando o cliente falar sobre agendar, honorários, valores, ou quiser falar com a advogada, pergunte DIRETAMENTE: 
-    "Você gostaria de agendar uma consulta com a Dra. Débora para avaliarmos os detalhes do seu caso? Responda SIM ou NÃO."
+    REGRA 2 - CAPTAÇÃO DE LEAD (A HORA CERTA):
+    SÓ E SOMENTE SÓ peça o telefone (WhatsApp) e o e-mail quando o cliente expressar claramente o desejo de: "agendar", "marcar consulta", "falar direto com a advogada", perguntar de "preço/honorários", ou disser "SIM" para a sua oferta de agendamento.
+    Exemplo de como você deve pedir: "Perfeito! Para que eu possa liberar o acesso à agenda da Dra. Débora e registrar seu atendimento, por favor, me informe seu telefone (com DDD) e seu e-mail."
 
-    REGRA 3 - O GATILHO DO SIM:
-    Se o cliente responder "SIM" (ou qualquer variação de concordância), você NÃO deve responder com texto longo. Responda EXATAMENTE E APENAS com esta palavra secreta: 
+    REGRA 3 - O GATILHO DA AGENDA (MUITO IMPORTANTE):
+    Assim que o cliente FORNECER os dados de contato (quando ele digitar um número de telefone ou um endereço de e-mail na conversa), o seu trabalho de captação terminou. Você NÃO deve responder com texto longo agradecendo. 
+    A SUA RESPOSTA DEVE SER EXATAMENTE E APENAS ESTA PALAVRA SECRETA:
     [REDIRECIONAR_AGENDA]
 
-    REGRA 4 - O GATILHO DO NÃO:
-    Se o cliente responder "NÃO", diga que compreende perfeitamente, reforce que o escritório está à disposição e pergunte se há mais alguma dúvida rápida que você possa anotar.`;
+    REGRA 4 - SE O CLIENTE RECUSAR:
+    Se o cliente disser "NÃO" para a agenda, agradeça gentilmente e diga que o escritório continua à disposição no WhatsApp (65) 99113-3336.`;
 
     const promptCompleto = `${systemPrompt}\n\nHistórico da conversa:\n${historyText}\n\nAssistente:`;
 
-    // Usando o modelo de nova geração que sua chave liberou!
-    //const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-      const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
+    // Mantendo no modelo Lite para evitar os engarrafamentos gratuitos
+    const googleURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
+
     const response = await fetch(googleURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,15 +49,15 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       if (data.error?.code === 503) {
-        return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113336." });
+        return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113-3336." });
       }
-      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113336.` });
+      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113-3336.` });
     }
 
     const replyText = data.candidates[0].content.parts[0].text;
     return NextResponse.json({ reply: replyText });
 
   } catch (error: any) {
-    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113336." }, { status: 500 });
+    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113-3336." }, { status: 500 });
   }
 }
