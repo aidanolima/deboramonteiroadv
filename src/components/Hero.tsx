@@ -44,18 +44,13 @@ export default function Hero() {
           {/* BOTÕES DE CTA (Margem inferior reduzida de mb-20 para mb-8) */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <a
-              href="https://wa.me/5565991133336" 
+              // Adicionamos o ?text= e a mensagem codificada aqui:
+              href="https://wa.me/556599113336?text=Ol%C3%A1!%20Vim%20do%20site%20da%20Dra.%20D%C3%A9bora%20e%20gostaria%20de%20falar%20com%20uma%20especialista." 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 px-8 rounded transition duration-300 shadow-lg text-center"
             >
               Fale com uma Especialista
-            </a>
-            <a
-              href="#servicos" 
-              className="inline-block bg-transparent hover:bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold py-3.5 px-8 rounded transition duration-300 text-center"
-            >
-              Conheça nossas Áreas
             </a>
           </div>
         </div>
