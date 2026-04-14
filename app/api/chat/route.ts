@@ -48,16 +48,14 @@ export async function POST(req: Request) {
     const data = await response.json();
 
     if (!response.ok) {
+      console.error("Erro retornado do Google:", data);
+      
       if (data.error?.code === 503) {
         return NextResponse.json({ reply: "Nossa rede está um pouco congestionada. Por favor, nos chame no WhatsApp: (65) 99113-3336." });
       }
-      return NextResponse.json({ reply: `Sistema indisponível. WhatsApp: (65) 99113-3336.` });
+      
+      // MUDANÇA AQUI: Agora a IA vai dedurar qual é o erro exato que o Google mandou!
+      return NextResponse.json({ 
+        reply: `⚠️ DEBUG - Erro do Google: [Código ${data.error?.code}] ${data.error?.message}` 
+      });
     }
-
-    const replyText = data.candidates[0].content.parts[0].text;
-    return NextResponse.json({ reply: replyText });
-
-  } catch (error: any) {
-    return NextResponse.json({ reply: "Erro de sistema. Chame no WhatsApp: (65) 99113-3336." }, { status: 500 });
-  }
-}
