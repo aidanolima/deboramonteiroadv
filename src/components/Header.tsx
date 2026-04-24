@@ -15,7 +15,6 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Valor de 50 para quando o menu deve mudar
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -24,10 +23,10 @@ export default function Header() {
 
   return (
     <header 
-      // CLAREAMENTO UNIFICADO: Mudança de bg-white para bg-zinc-900 no scrolled
+      // VISUAL CLEAN: Mudança para bg-zinc-800/90 com um blur mais suave
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-zinc-900/95 backdrop-blur-md border-b border-zinc-700/50 py-3 shadow-lg' 
+          ? 'bg-zinc-800/90 backdrop-blur-md border-b border-zinc-600/40 py-3 shadow-sm' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -38,11 +37,9 @@ export default function Header() {
           <img 
             src="/logo.png" 
             alt="Logo Débora Monteiro" 
-            // AJUSTE DE BORDA: border-zinc-700 para contraste sobre o fundo escuro
-            className={`h-11 w-11 rounded-full object-cover shadow-sm transition-all duration-300 ${isScrolled ? 'border border-zinc-700' : 'border-2 border-amber-500/50'}`}
+            className={`h-11 w-11 rounded-full object-cover shadow-sm transition-all duration-300 ${isScrolled ? 'border border-zinc-500' : 'border-2 border-amber-500/50'}`}
           />
-          {/* AJUSTE DE COR: text-white no scrolled */}
-          <span className={`text-xl font-serif font-bold transition-all duration-300 hidden sm:block ${isScrolled || isMobileMenuOpen ? 'text-white' : 'text-white'}`}>
+          <span className={`text-xl font-serif font-bold transition-all duration-300 hidden sm:block text-white`}>
             Débora Monteiro Advogada
           </span>
         </div>
@@ -54,23 +51,21 @@ export default function Header() {
               <a 
                 key={item.name} 
                 href={item.href} 
-                // AJUSTE DE COR: text-zinc-100 no scrolled para visibilidade
-                className={`text-sm font-medium transition-all duration-300 ${isScrolled ? 'text-zinc-100 hover:text-amber-400' : 'text-zinc-100 hover:text-amber-400'}`}
+                className="text-sm font-medium transition-all duration-300 text-zinc-100 hover:text-amber-400"
               >
                 {item.name}
               </a>
             ))}
-            {/* AJUSTE DE COR: text-amber-500 no scrolled */}
-            <span className={`text-sm font-semibold transition-all duration-300 whitespace-nowrap ${isScrolled ? 'text-amber-500' : 'text-amber-500'}`}>
-              (65) 99113336
+            <span className="text-sm font-semibold transition-all duration-300 whitespace-nowrap text-amber-500">
+              (65) 99113-3336
             </span>
           </nav>
 
           <a
-            href="https://wa.me/556599113336"
+            href="https://wa.me/5565991133336?text=Ol%C3%A1!%20Vim%20do%20site%20da%20Dra.%20D%C3%A9bora%20e%20gostaria%20de%20falar%20com%20uma%20especialista."
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-block bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold py-2.5 px-5 rounded transition shadow-md whitespace-nowrap"
+            className="hidden md:inline-block bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold py-2.5 px-5 rounded transition shadow-md whitespace-nowrap"
           >
             Agendar Consulta
           </a>
@@ -80,8 +75,7 @@ export default function Header() {
             className="md:hidden p-2 focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {/* AJUSTE DE COR: text-white no scrolled */}
-            <svg className={`w-6 h-6 ${isScrolled || isMobileMenuOpen ? 'text-white' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -94,29 +88,28 @@ export default function Header() {
 
       {/* MENU MOBILE EXPANDIDO */}
       {isMobileMenuOpen && (
-        // CLAREAMENTO UNIFICADO: bg-zinc-900 no mobile menu
-        <div className="md:hidden bg-zinc-900/95 backdrop-blur-md border-t border-zinc-700/50 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl animate-in slide-in-from-top duration-300">
+        // VISUAL CLEAN MOBILE
+        <div className="md:hidden bg-zinc-800/95 backdrop-blur-md border-t border-zinc-600/50 mt-3 absolute w-full left-0 px-6 py-4 shadow-xl animate-in slide-in-from-top duration-300">
           <nav className="flex flex-col gap-4">
             {menuItems.map((item) => (
               <a 
                 key={item.name} 
                 href={item.href} 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                // AJUSTE DE COR: text-zinc-100 no mobile
                 className="text-base font-medium text-zinc-100 hover:text-amber-400 transition-colors"
               >
                 {item.name}
               </a>
             ))}
-            <div className="h-px bg-zinc-700 my-2"></div>
+            <div className="h-px bg-zinc-600/50 my-2"></div>
             <a
-              href="https://wa.me/556599113336"
+              href="https://wa.me/5565991133336?text=Ol%C3%A1!%20Vim%20do%20site%20da%20Dra.%20D%C3%A9bora%20e%20gostaria%20de%20falar%20com%20uma%20especialista."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="bg-orange-600 text-center text-white text-base font-bold py-3 px-5 rounded shadow-md"
+              className="bg-amber-600 text-center text-white text-base font-bold py-3 px-5 rounded shadow-md"
             >
-              Agendar Consulta - (65) 99113336
+              Agendar Consulta - (65) 99113-3336
             </a>
           </nav>
         </div>
