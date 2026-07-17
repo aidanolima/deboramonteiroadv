@@ -9,12 +9,12 @@ const testimonialsList = [
   {
     name: "Ana Lúcia Ferreira",
     role: "Cliente de Direito de Família",
-    text: "Passei por um divórcio muito conturbado e encontrei no escritório o acolhimento e a firmeza necessários. A humanidade no atendimento fez toda a diferença na fase mais difícil da minha vida.",
+    text: "Passei por um divórcio muito conturbado e encontrei no escritório da Dra. Débora o acolhimento e a firmeza necessários. A humanidade no atendimento fez toda a diferença na fase mais difícil da minha vida.",
   },
   {
     name: "Roberto Mendes",
     role: "Cliente Trabalhista",
-    text: "Excelente escritório! Conseguiram resolver meu problema trabalhista que se arrastava há anos com a antiga empresa. Competência, honestidade e agilidade. Recomendo de olhos fechados.",
+    text: "Excelente escritório! A Dra. Débora e sua equipe conseguiram resolver o meu problema trabalhista que se arrastava há anos com a antiga empresa. Competência, honestidade e agilidade. Recomendo de olhos fechados.",
   },
 ];
 

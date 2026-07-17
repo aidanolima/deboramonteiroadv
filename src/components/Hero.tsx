@@ -38,7 +38,7 @@ export default function Hero() {
 
           {/* Novo Texto e fonte reduzida para base/lg */}
           <p className="text-base md:text-lg text-zinc-200 mb-8 max-w-2xl leading-relaxed">
-            A Advogada Débora Monteiro atua com dedicação, ética e excelência para garantir a melhor solução jurídica para o seu caso, focando na segurança e bem-estar de nossos clientes.
+            A Dra. Débora Monteiro atua com dedicação, ética e excelência para garantir a melhor solução jurídica para o seu caso, focando na segurança e bem-estar de nossos clientes.
           </p>
           
           {/* BOTÕES DE CTA (Margem inferior reduzida de mb-20 para mb-8) */}
